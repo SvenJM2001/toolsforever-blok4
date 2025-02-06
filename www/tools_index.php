@@ -44,8 +44,12 @@ require 'header.php';
                         <a href="tools_detail.php?id=<?php echo $tool['tool_id'] ?>">Bekijk</a>
                         Wijzig
                         Verwijder
-                        <!-- <a href="tools_edit.php?id=<?php echo $tool['tool_id'] ?>">Wijzig</a>
-                        <a href="tools_delete.php?id=<?php echo $tool['tool_id'] ?>">Verwijder</a> -->
+                        <!-- <a href="tools_edit.php?id=<?php echo $tool['tool_id'] ?>">Wijzig</a> -->
+                        <a href="tools_delete.php?id=<?php echo $tool['tool_id'] ?>"
+                        onclick="return confirm('weet je het zeker dat je deze tool wilt verwijderen?')"
+                        >
+                        Verwijder
+                    </a> 
                     </td>
                 </tr>
             <?php endforeach; ?>

@@ -1,4 +1,4 @@
-//brands table
+-- brands table
 CREATE TABLE brands (
     brand_id INT NOT NULL AUTO_INCREMENT,
     brand_name VARCHAR(50) NOT NULL,
