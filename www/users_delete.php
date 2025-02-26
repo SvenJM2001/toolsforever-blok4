@@ -12,9 +12,19 @@ if(    isset($_GET['id'])     ){
 
     $id = $_GET["id"];
 
-    $sql = "DELETE FROM users WHERE id = $id";
+    try {
+        $sql = "DELETE FROM users WHERE id = :id";
 
-    mysqli_query($conn, $sql);
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
 
-    header("location: users_index.php");
+        header("Location: users_index.php");
+        exit;
+
+    } catch (PDOException $e) {
+        // Foutafhandeling
+        echo "Something went wrong: " . $e->getMessage();
+        exit;
+    }
 }

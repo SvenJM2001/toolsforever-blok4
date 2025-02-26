@@ -34,7 +34,7 @@ require 'header.php';
             </div>
             <div>
                 <label for="brand">Merk:</label>
-                <input type="brand" id="brand" name="brand">
+                <select name="" id=""></select>
             </div>
             <div>
                 <label for="image">Afbeelding:</label>

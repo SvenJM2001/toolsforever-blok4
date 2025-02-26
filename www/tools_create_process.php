@@ -27,11 +27,31 @@ $brand = $_POST['brand'];
 $image = $_POST['image'];
 
 
-$sql = "INSERT INTO tools (tool_name, tool_category, tool_price, tool_brand, tool_image) VALUES ('$name', '$category', '$price', '$brand', '$image')";
-$result = mysqli_query($conn, $sql);
+try {
+    // Prepare the SQL query with placeholders
+    $sql = "INSERT INTO tools (tool_name, tool_category, tool_price, tool_brand, tool_image) 
+            VALUES (:name, :category, :price, :brand, :image)";
+    
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+    
+    // Bind the parameters to the placeholders
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':category', $category);
+    $stmt->bindParam(':price', $price);
+    $stmt->bindParam(':brand', $brand);
+    $stmt->bindParam(':image', $image);
+    
+    // Execute the statement
+    $stmt->execute();
 
-if ($result) {
+    // Redirect to the tool index page if successful
     header("Location: tool_index.php");
+    exit;
+
+} catch (PDOException $e) {
+    // Handle any errors
+    echo "Something went wrong: " . $e->getMessage();
     exit;
 }
 

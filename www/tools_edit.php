@@ -13,9 +13,19 @@ if ($_SESSION['role'] != 'admin') {
 }
 require 'database.php';
 
-$sql = "SELECT * FROM users";
-$result = mysqli_query($conn, $sql);
-$users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+try {
+    // Haal alle gebruikers op uit de database
+    $sql = "SELECT * FROM users";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+    // Haal de resultaten op als een associatieve array
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    echo "Something went wrong: " . $e->getMessage();
+    exit;
+}
 
 require 'header.php';
 ?>
